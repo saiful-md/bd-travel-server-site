@@ -43,7 +43,7 @@ async function run() {
 			const tourId = req.params.id;
 			const query = { _id: ObjectId(tourId) };
 			const tour = await tourismCollection.findOne(query);
-			// console.log(tour);
+			console.log(tour);
 			res.json(tour);
 		});
 
