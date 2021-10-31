@@ -24,14 +24,14 @@ async function run() {
 		const database = client.db('tourismSelect');
 		const tourismCollection = database.collection('tourismCollection');
 		const newBookingCollection = database.collection('newBooking');
-		app.post('/user', async (req, res) => {
+		app.post('/allTickets', async (req, res) => {
 			const user = req.body;
 			const result = await tourismCollection.insertOne(user);
 
 			// console.log('hitting the post', user);
 			res.json(result);
 		});
-		app.get('/user', async (req, res) => {
+		app.get('/allTickets', async (req, res) => {
 			const getUser = tourismCollection.find({});
 			const cursor = await getUser.toArray();
 			// console.log(cursor);
@@ -39,7 +39,7 @@ async function run() {
 		});
 
 		// lod dynamic id get method
-		app.get('/user/:id', async (req, res) => {
+		app.get('/allTickets/:id', async (req, res) => {
 			const tourId = req.params.id;
 			const query = { _id: ObjectId(tourId) };
 			const tour = await tourismCollection.findOne(query);
@@ -48,23 +48,23 @@ async function run() {
 		});
 
 		/// send spacific boking post api
-		app.post('/user/newBooking', async (req, res) => {
-			const newBooked = req.body;
-			const currentBooked = [
-				...tourismCollection,
-				newBooked
-			];
-			const result = await newBookingCollection.insertOne(currentBooked);
-			console.log(result);
-			res.send(result);
-		});
-		// send data ui get api
-		app.get('/user/newBooking', async (req, res) => {
-			const cursor = newBookingCollection.find({});
-			const result = await cursor.toArray();
-			// console.log(result);
-			res.json(result);
-		});
+		// app.post('/allTickets/newBooking', async (req, res) => {
+		// 	const newBooked = req.body;
+		// 	const currentBooked = [
+		// 		...tourismCollection,
+		// 		newBooked
+		// 	];
+		// 	const result = await newBookingCollection.insertOne(currentBooked);
+		// 	console.log(result);
+		// 	res.send(result);
+		// });
+		// // send data ui get api
+		// app.get('/allTickets/newBooking', async (req, res) => {
+		// 	const cursor = newBookingCollection.find({});
+		// 	const result = await cursor.toArray();
+		// 	// console.log(result);
+		// 	res.json(result);
+		// });
 	} finally {
 		//   await client.close();
 	}
