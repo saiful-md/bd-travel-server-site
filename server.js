@@ -73,7 +73,7 @@ async function run() {
 		// delete spacific user from ui
 		app.delete('/spacificUser/:id', async (req, res) => {
 			const deleteId = req.params.id;
-			console.log(deleteId);
+			// console.log(deleteId);
 			const query = { _id: ObjectId(deleteId) };
 			const tour = await newBookingCollection.deleteOne(query);
 			// console.log(tour, 'delete')
