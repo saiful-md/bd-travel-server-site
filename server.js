@@ -32,8 +32,8 @@ async function run() {
 			// newSopt.id = tourismCollection.length;
 			const result = await tourismCollection.insertOne(newSpot);
 
-			console.log('hitting the post', result);
-			// res.json(result);
+			// console.log('hitting the post', result);
+			res.json(result);
 		});
 
 		// get all service data from server
@@ -59,7 +59,7 @@ async function run() {
 			spacificUserItem.status = 'pending';
 			const result = await newBookingCollection.insertOne(spacificUserItem);
 			// console.log('hit the server', result);
-			res.send(result);
+			res.json(result);
 		});
 
 		app.get('/spacificUSer', async (req, res) => {
@@ -75,7 +75,7 @@ async function run() {
 			console.log(deleteId);
 			const query = { _id: ObjectId(deleteId) };
 			const tour = await newBookingCollection.deleteOne(query);
-			console.log(tour, 'delete');
+			// console.log(tour, 'delete')
 			res.json(tour);
 		});
 	} finally {
@@ -85,7 +85,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-	console.log('start server');
+	// console.log('start server');
 	res.send('server is running ');
 });
 
