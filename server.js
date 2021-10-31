@@ -44,7 +44,7 @@ async function run() {
 			res.json(cursor);
 		});
 
-		// load dynamic service data with id: GET API
+		// load dynamic service data with id: GET API go
 		app.get('/allTickets/:id', async (req, res) => {
 			const tourId = req.params.id;
 			const query = { _id: ObjectId(tourId) };
