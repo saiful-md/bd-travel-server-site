@@ -1,5 +1,6 @@
 # Travel-BD server site 
-Client site Link: (https://bd-travel-a8f8d.web.app/home).
+client site github link (https://github.com/saiful-md/bd-travel-client-site)
+live Link: (https://bd-travel-a8f8d.web.app/home).
 
 
 ## Using mongo atlas (no sql) database for made this app.

@@ -18,8 +18,6 @@ const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-console.log(uri);
-
 async function run() {
 	try {
 		await client.connect();
@@ -30,10 +28,7 @@ async function run() {
 		//add a new tour spot: POST API
 		app.post('/allTickets', async (req, res) => {
 			const newSpot = req.body;
-			// newSopt.id = tourismCollection.length;
 			const result = await tourismCollection.insertOne(newSpot);
-
-			// console.log('hitting the post', result);
 			res.json(result);
 		});
 
@@ -41,7 +36,6 @@ async function run() {
 		app.get('/allTickets', async (req, res) => {
 			const getUser = tourismCollection.find({});
 			const cursor = await getUser.toArray();
-			// console.log(cursor);
 			res.json(cursor);
 		});
 
@@ -50,7 +44,6 @@ async function run() {
 			const tourId = req.params.id;
 			const query = { _id: ObjectId(tourId) };
 			const tour = await tourismCollection.findOne(query);
-			// console.log(tour);
 			res.json(tour);
 		});
 
@@ -59,24 +52,21 @@ async function run() {
 			const spacificUserItem = req.body;
 			spacificUserItem.status = 'pending';
 			const result = await newBookingCollection.insertOne(spacificUserItem);
-			// console.log('hit the server', result);
 			res.json(result);
 		});
 
 		app.get('/spacificUSer', async (req, res) => {
 			const cursor = newBookingCollection.find({});
 			const query = await cursor.toArray();
-			// console.log(query);
+			
 			res.json(query);
 		});
 
 		// delete spacific user from ui
 		app.delete('/spacificUser/:id', async (req, res) => {
 			const deleteId = req.params.id;
-			// console.log(deleteId);
 			const query = { _id: ObjectId(deleteId) };
 			const tour = await newBookingCollection.deleteOne(query);
-			// console.log(tour, 'delete')
 			res.json(tour);
 		});
 	} finally {
@@ -86,7 +76,6 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-	// console.log('start server');
 	res.send('server is running ');
 });
 
